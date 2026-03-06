@@ -1,0 +1,121 @@
+<div class="home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero__container">
+      <h1 class="hero__title">Welcome to Product Explorer</h1>
+      <p class="hero__subtitle">Discover amazing products from around the world</p>
+      <div class="hero__actions">
+        <a routerLink="/catalog" class="button button--large">
+          <i class="fas fa-search"></i>
+          Browse Catalog
+        </a>
+        <a routerLink="/favorites" class="button button--secondary button--large">
+          <i class="fas fa-heart"></i>
+          View Favorites
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why Choose Us</h2>
+      <div class="features__grid">
+        <div class="feature-card card">
+          <i class="fas fa-search feature-card__icon"></i>
+          <h3 class="feature-card__title">Easy Search</h3>
+          <p class="feature-card__description">Find exactly what you're looking for with our powerful search and filters</p>
+        </div>
+        <div class="feature-card card">
+          <i class="fas fa-heart feature-card__icon"></i>
+          <h3 class="feature-card__title">Save Favorites</h3>
+          <p class="feature-card__description">Keep track of products you love with our favorites feature</p>
+        </div>
+        <div class="feature-card card">
+          <i class="fas fa-mobile-alt feature-card__icon"></i>
+          <h3 class="feature-card__title">Mobile Friendly</h3>
+          <p class="feature-card__description">Shop seamlessly on any device with our responsive design</p>
+        </div>
+        <div class="feature-card card">
+          <i class="fas fa-bolt feature-card__icon"></i>
+          <h3 class="feature-card__title">Fast & Reliable</h3>
+          <p class="feature-card__description">Experience lightning-fast performance and real-time updates</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="featured-products">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+      
+      <div *ngIf="loading().loading" class="loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        Loading featured products...
+      </div>
+
+      <div *ngIf="!loading().loading && featuredProducts().length === 0" class="error">
+        <i class="fas fa-exclamation-circle"></i>
+        No featured products available.
+      </div>
+
+      <div *ngIf="!loading().loading && featuredProducts().length > 0" class="featured-products__grid">
+        <div *ngFor="let product of featuredProducts()" class="product-card card">
+          <div class="product-card__image-container">
+            <img [src]="product.imageUrl" [alt]="product.name" class="product-card__image" loading="lazy">
+            <button
+              (click)="toggleFavorite(product.id)"
+              class="product-card__favorite"
+              [class.active]="product.isFavorite"
+              [attr.aria-label]="(product.isFavorite ? 'Remove from' : 'Add to') + ' favorites'"
+            >
+              <i class="fas" [ngClass]="product.isFavorite ? 'fa-heart' : 'fa-heart'"></i>
+            </button>
+          </div>
+          <div class="product-card__content">
+            <h3 class="product-card__title">
+              <a [routerLink]="['/product', product.id]" class="product-card__link">
+                {{product.name}}
+              </a>
+            </h3>
+            <div class="product-card__meta">
+              <span class="product-card__price">
+                <i class="fas fa-tag"></i>
+                R {{product.price | number:'1.2-2'}}
+              </span>
+              <span class="product-card__rating">
+                <i class="fas fa-star"></i>
+                {{product.rating}}
+              </span>
+            </div>
+            <a [routerLink]="['/product', product.id]" class="product-card__view">
+              View Details
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="featured-products__more">
+        <a routerLink="/catalog" class="button button--outline">
+          View All Products
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta">
+    <div class="container cta__container">
+      <h2 class="cta__title">Ready to start exploring?</h2>
+      <p class="cta__description">Join thousands of satisfied customers discovering amazing products every day.</p>
+      <a routerLink="/catalog" class="button button--large">
+        Get Started Now
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+</div>

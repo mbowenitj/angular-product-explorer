@@ -1,0 +1,51 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <a routerLink="/" class="header__logo-link">
+       <fa-icon [icon]="faStore" class="header__logo-icon"></fa-icon>
+        <span class="header__logo-text">Product Explorer</span>
+      </a>
+    </div>
+    
+    <nav class="nav" aria-label="Main navigation">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a routerLink="/" 
+             routerLinkActive="nav__link--active"
+             [routerLinkActiveOptions]="{exact: true}"
+             class="nav__link"
+             ariaCurrentWhenActive="page">
+            Home
+          </a>
+        </li>
+        <li class="nav__item">
+          <a routerLink="/catalog" 
+             routerLinkActive="nav__link--active"
+             class="nav__link"
+             ariaCurrentWhenActive="page">
+            Catalog
+          </a>
+        </li>
+        <li class="nav__item">
+          <a routerLink="/favorites" 
+             routerLinkActive="nav__link--active"
+             class="nav__link"
+             ariaCurrentWhenActive="page">
+            Favorites
+            <span *ngIf="favoritesCount().length > 0" class="nav__badge" aria-label="Number of favorites">
+              {{favoritesCount().length}}
+            </span>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a routerLink="/admin" 
+             routerLinkActive="nav__link--active"
+             class="nav__link"
+             ariaCurrentWhenActive="page">
+            Admin
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
