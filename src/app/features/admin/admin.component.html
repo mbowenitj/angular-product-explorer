@@ -1,0 +1,70 @@
+<div class="admin">
+  <div class="admin__header">
+    <h1 class="admin__title">Admin Panel</h1>
+    <button (click)="logout()" class="button button--secondary">
+      <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      Logout
+    </button>
+  </div>
+
+  <div class="admin__content">
+    <div class="admin__stats">
+      <div class="stat-card">
+        <h3 class="stat-card__title">Total Products</h3>
+        <p class="stat-card__value">150</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-card__title">Total Users</h3>
+        <p class="stat-card__value">1,234</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-card__title">Orders</h3>
+        <p class="stat-card__value">89</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-card__title">Revenue</h3>
+        <p class="stat-card__value">R12,345</p>
+      </div>
+    </div>
+
+    <div class="admin__actions">
+      <h2 class="admin__section-title">Quick Actions</h2>
+      <div class="actions-grid">
+        <button class="action-card">
+          <fa-icon [icon]="faPlusCircle" class="action-card__icon"></fa-icon>
+          <span class="action-card__label">Add Product</span>
+        </button>
+        <button class="action-card">
+          <fa-icon [icon]="faBox" class="action-card__icon"></fa-icon>
+          <span class="action-card__label">Manage Orders</span>
+        </button>
+        <button class="action-card">
+          <fa-icon [icon]="faUsers" class="action-card__icon"></fa-icon>
+          <span class="action-card__label">Manage Users</span>
+        </button>
+        <button class="action-card">
+          <fa-icon [icon]="faChartBar" class="action-card__icon"></fa-icon>
+          <span class="action-card__label">View Reports</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="admin__recent">
+      <h2 class="admin__section-title">Recent Activity</h2>
+      <div class="activity-list">
+        <div class="activity-item">
+          <span class="activity-item__time">2 min ago</span>
+          <span class="activity-item__description">New order #1234 received</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-item__time">15 min ago</span>
+          <span class="activity-item__description">Product "Smart Watch" updated</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-item__time">1 hour ago</span>
+          <span class="activity-item__description">New user registered</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
