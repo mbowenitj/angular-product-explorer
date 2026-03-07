@@ -1,51 +1,84 @@
 <header class="header">
   <div class="header__container">
+
+    <!-- Logo -->
     <div class="header__logo">
       <a routerLink="/" class="header__logo-link">
-       <fa-icon [icon]="faStore" class="header__logo-icon"></fa-icon>
+        <fa-icon [icon]="faStore" class="header__logo-icon"></fa-icon>
         <span class="header__logo-text">Product Explorer</span>
       </a>
     </div>
-    
+
+    <!-- Navigation -->
     <nav class="nav" aria-label="Main navigation">
       <ul class="nav__list">
+
         <li class="nav__item">
-          <a routerLink="/" 
-             routerLinkActive="nav__link--active"
-             [routerLinkActiveOptions]="{exact: true}"
-             class="nav__link"
-             ariaCurrentWhenActive="page">
+          <a
+            routerLink="/"
+            routerLinkActive="nav__link--active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav__link"
+          >
             Home
           </a>
         </li>
+
         <li class="nav__item">
-          <a routerLink="/catalog" 
-             routerLinkActive="nav__link--active"
-             class="nav__link"
-             ariaCurrentWhenActive="page">
+          <a
+            routerLink="/catalog"
+            routerLinkActive="nav__link--active"
+            class="nav__link"
+          >
             Catalog
           </a>
         </li>
+
         <li class="nav__item">
-          <a routerLink="/favorites" 
-             routerLinkActive="nav__link--active"
-             class="nav__link"
-             ariaCurrentWhenActive="page">
+          <a
+            routerLink="/favorites"
+            routerLinkActive="nav__link--active"
+            class="nav__link"
+          >
             Favorites
-            <span *ngIf="favoritesCount().length > 0" class="nav__badge" aria-label="Number of favorites">
-              {{favoritesCount().length}}
+
+            <span
+              *ngIf="favorites().length > 0"
+              class="nav__badge"
+            >
+              {{ favorites().length }}
             </span>
+
           </a>
         </li>
+
+        <!-- Admin Panel -->
+        <li *ngIf="isAdmin" class="nav__item">
+          <a
+            routerLink="/admin"
+            routerLinkActive="nav__link--active"
+            class="nav__link admin-link"
+          >
+            Admin Panel
+          </a>
+        </li>
+
+        <!-- Mode Toggle -->
         <li class="nav__item">
-          <a routerLink="/admin" 
-             routerLinkActive="nav__link--active"
-             class="nav__link"
-             ariaCurrentWhenActive="page">
-            Admin
-          </a>
+          <button
+            (click)="toggleAdmin()"
+            class="mode-toggle"
+            [class.admin-mode]="isAdmin"
+          >
+            <fa-icon [icon]="isAdmin ? faUser : faUserShield"></fa-icon>
+            <span>
+              {{ isAdmin ? 'Switch to User' : 'Switch to Admin' }}
+            </span>
+          </button>
         </li>
+
       </ul>
     </nav>
+
   </div>
 </header>

@@ -1,22 +1,15 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 export const authGuard = () => {
   const router = inject(Router);
+  const authService = inject(AuthService); 
   
-  // Simulate authentication check
-  const isAuthenticated = localStorage.getItem('isAdmin') === 'true';
-  
-  if (!isAuthenticated) {
-    const userIsAdmin = confirm('This area is restricted to administrators. Click OK to continue as admin.');
-    
-    if (userIsAdmin) {
-      localStorage.setItem('isAdmin', 'true');
-      return true;
-    }
-    
-    return false;
+  if (authService.isAuthenticated() && authService.hasRole('admin')) {
+    return true;
   }
   
-  return true;
+  router.navigate(['/']);
+  return false;
 };
