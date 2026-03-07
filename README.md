@@ -28,12 +28,12 @@ Before you begin, ensure you have the following installed:
 ```bash
 # Check your Node.js version
 node -v
-# Should show v18.20.8 or higher
+# v18.20.8 or higher
 
 ## Clone repo
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/mbowenitj/angular-product-explorer.git
 ```
 ## Navigate to the project directory
 

@@ -4,32 +4,32 @@ import { authGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+    loadChildren: () => import('./features/home/home.routes'),
     title: 'Home - Product Explorer'
   },
   {
     path: 'catalog',
-    loadComponent: () => import('./features/catalog/catalog.component').then(m => m.CatalogComponent),
+    loadChildren: () => import('./features/catalog/catalog.routes'),
     title: 'Product Catalog'
   },
   {
     path: 'product/:id',
-    loadComponent: () => import('./features/product-details/product-details.component').then(m => m.ProductDetailsComponent),
+    loadChildren: () => import('./features/product-details/product-details.routes'),
     title: 'Product Details'
   },
   {
     path: 'favorites',
-    loadComponent: () => import('./features/favorites/favorites.component').then(m => m.FavoritesComponent),
+    loadChildren: () => import('./features/favorites/favorites.routes'),
     title: 'My Favorites'
   },
   {
     path: 'admin',
-    loadComponent: () => import('./features/admin/admin.component').then(m => m.AdminComponent),
+    loadChildren: () => import('./features/admin/admin.routes'),
     canMatch: [authGuard],
     title: 'Admin Panel'
   },
   {
     path: '**',
-    loadComponent: () => import('./shared/components/not-found/not-found.component').then(m => m.NotFoundComponent)
+    loadChildren: () => import('./shared/components/not-found/not-found.routes')
   }
 ];
