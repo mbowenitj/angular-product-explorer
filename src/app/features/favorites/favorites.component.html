@@ -1,0 +1,84 @@
+<div class="favorites">
+  <div class="favorites__header">
+    <h1 class="favorites__title">
+      <i class="fas fa-heart"></i>
+      My Favorites
+    </h1>
+    <div class="favorites__count" *ngIf="totalItems() > 0">
+      <i class="fas fa-box"></i>
+      <span>{{totalItems()}}</span> {{totalItems() === 1 ? 'item' : 'items'}}
+    </div>
+  </div>
+
+  <div *ngIf="loading()" class="favorites__loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <p>Loading favorites...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading() && totalItems() === 0" class="favorites__empty">
+    <i class="fas fa-heart-broken"></i>
+    <p>You haven't added any favorites yet.</p>
+    <a routerLink="/catalog" class="button">
+      <i class="fas fa-search"></i>
+      Browse Catalog
+    </a>
+  </div>
+
+  <!-- Favorites Grid -->
+  <div *ngIf="!loading() && totalItems() > 0" class="favorites__grid">
+    <div *ngFor="let product of paginatedFavorites()" class="favorite-card">
+      <div class="favorite-card__image-container">
+        <img
+          [src]="product.imageUrl"
+          [alt]="product.name"
+          class="favorite-card__image"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="favorite-card__content">
+        <h2 class="favorite-card__title">
+          <a [routerLink]="['/product', product.id]" class="favorite-card__link">
+            {{product.name}}
+          </a>
+        </h2>
+        
+        <p class="favorite-card__description">
+          {{product.description | slice:0:80}}...
+        </p>
+        
+        <div class="favorite-card__meta">
+          <span class="favorite-card__price">
+            <i class="fas fa-tag"></i>
+            R {{product.price | number:'1.2-2'}}
+          </span>
+          
+          <span class="favorite-card__rating">
+            <i class="fas fa-star"></i>
+            {{product.rating}}
+          </span>
+        </div>
+        
+        <button
+          (click)="removeFromFavorites(product.id)"
+          class="favorite-card__remove"
+          aria-label="Remove from favorites"
+        >
+          <i class="fas fa-trash-alt"></i>
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <app-pagination
+    *ngIf="!loading() && totalItems() > pageSize()"
+    [totalItems]="totalItems()"
+    [pageSize]="pageSize()"
+    [currentPage]="currentPage()"
+    [itemsPerPageOptions]="[4, 8, 12, 24]"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+  ></app-pagination>
+</div>
