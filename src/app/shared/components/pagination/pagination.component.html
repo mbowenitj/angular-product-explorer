@@ -1,0 +1,113 @@
+<div class="pagination" *ngIf="totalPages > 1 || showItemsPerPage">
+  <!-- Items info -->
+  <div class="pagination__info" *ngIf="totalItems > 0">
+    <fa-icon [icon]="faList"></fa-icon>
+    Showing <span class="pagination__info-highlight">{{startItem}}</span> 
+    to <span class="pagination__info-highlight">{{endItem}}</span> 
+    of <span class="pagination__info-highlight">{{totalItems}}</span> items
+  </div>
+  
+  <!-- Pagination controls -->
+  <div class="pagination__controls">
+    <!-- First Page Button -->
+    <button 
+      *ngIf="showFirstLast"
+      class="pagination__btn pagination__btn--first"
+      (click)="goToFirst()"
+      [disabled]="isFirstPage()"
+      aria-label="First page"
+    >
+      <fa-icon [icon]="faAngleDoubleLeft"></fa-icon>
+      <span class="pagination__btn-text">First</span>
+    </button>
+    
+    <!-- Previous Page Button -->
+    <button 
+      *ngIf="showPrevNext"
+      class="pagination__btn pagination__btn--prev"
+      (click)="goToPrevious()"
+      [disabled]="isFirstPage()"
+      aria-label="Previous page"
+    >
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+      <span class="pagination__btn-text">Prev</span>
+    </button>
+    
+    <!-- Page Numbers -->
+    <div class="pagination__pages" *ngIf="showPageNumbers && totalPages > 0">
+      <!-- Show first page with ellipsis if needed -->
+      <ng-container *ngIf="visiblePages.length > 0 && visiblePages[0] > 1">
+        <button 
+          class="pagination__page" 
+          (click)="goToPage(1)"
+        >
+          1
+        </button>
+        <span class="pagination__ellipsis" *ngIf="visiblePages[0] > 2">...</span>
+      </ng-container>
+      
+      <!-- Visible Pages -->
+      <button 
+        *ngFor="let page of visiblePages"
+        class="pagination__page"
+        [class.pagination__page--active]="page === currentPage"
+        (click)="goToPage(page)"
+      >
+        {{page}}
+      </button>
+      
+      <!-- Show last page with ellipsis if needed -->
+      <ng-container *ngIf="visiblePages.length > 0 && visiblePages[visiblePages.length - 1] < totalPages">
+        <span class="pagination__ellipsis" *ngIf="visiblePages[visiblePages.length - 1] < totalPages - 1">...</span>
+        <button 
+          class="pagination__page" 
+          (click)="goToPage(totalPages)"
+        >
+          {{totalPages}}
+        </button>
+      </ng-container>
+    </div>
+    
+    <!-- Next Page Button -->
+    <button 
+      *ngIf="showPrevNext"
+      class="pagination__btn pagination__btn--next"
+      (click)="goToNext()"
+      [disabled]="isLastPage()"
+      aria-label="Next page"
+    >
+      <span class="pagination__btn-text">Next</span>
+      <fa-icon [icon]="faChevronRight"></fa-icon>
+    </button>
+    
+    <!-- Last Page Button -->
+    <button 
+      *ngIf="showFirstLast"
+      class="pagination__btn pagination__btn--last"
+      (click)="goToLast()"
+      [disabled]="isLastPage()"
+      aria-label="Last page"
+    >
+      <span class="pagination__btn-text">Last</span>
+      <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+    </button>
+  </div>
+  
+  <!-- Items Per Page Selector -->
+  <div class="pagination__per-page" *ngIf="showItemsPerPage">
+    <label for="itemsPerPage" class="pagination__per-page-label">
+      <fa-icon [icon]="faEye"></fa-icon>
+      Items per page:
+    </label>
+    <select 
+      id="itemsPerPage"
+      class="pagination__per-page-select"
+      [ngModel]="pageSize"
+      (ngModelChange)="onPageSizeChange($event)"
+    >
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+        {{option}}
+      </option>
+    </select>
+  </div>
+</div>
