@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Premium Wireless Headphones",
+    "description": "High-quality wireless headphones with noise cancellation, 30-hour battery life, and premium sound quality. Perfect for music lovers and professionals.",
+    "price": 299.99,
+    "category": "Electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
+    "rating": 4.8,
+    "inStock": true,
+    "tags": ["wireless", "audio", "premium"],
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Smart Fitness Watch",
+    "description": "Track your fitness goals with this advanced smartwatch. Features heart rate monitoring, GPS, sleep tracking, and 7-day battery life.",
+    "price": 199.99,
+    "category": "Wearables",
+    "imageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
+    "rating": 4.6,
+    "inStock": true,
+    "tags": ["fitness", "smartwatch", "tracker"],
+    "createdAt": "2024-01-20T14:45:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Professional Camera Kit",
+    "description": "Complete camera kit including body, 2 lenses, and accessories. Perfect for photography enthusiasts and professionals.",
+    "price": 1299.99,
+    "category": "Photography",
+    "imageUrl": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500",
+    "rating": 4.9,
+    "inStock": false,
+    "tags": ["camera", "photography", "professional"],
+    "createdAt": "2024-01-10T09:15:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Ergonomic Office Chair",
+    "description": "Premium ergonomic chair with lumbar support, adjustable armrests, and breathable mesh backing. Perfect for long work hours.",
+    "price": 449.99,
+    "category": "Furniture",
+    "imageUrl": "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500",
+    "rating": 4.7,
+    "inStock": true,
+    "tags": ["office", "furniture", "ergonomic"],
+    "createdAt": "2024-01-25T11:20:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Ultrabook Laptop",
+    "description": "Lightweight and powerful laptop with 16GB RAM, 512GB SSD, and 12th gen Intel Core i7 processor. Perfect for work and entertainment.",
+    "price": 1499.99,
+    "category": "Computers",
+    "imageUrl": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
+    "rating": 4.9,
+    "inStock": true,
+    "tags": ["laptop", "computers", "ultrabook"],
+    "createdAt": "2024-01-05T08:30:00Z"
+  },
+  {
+    "id": 6,
+    "name": "Smart Home Hub",
+    "description": "Central control for your smart home devices. Compatible with lights, thermostats, security cameras, and more.",
+    "price": 129.99,
+    "category": "Smart Home",
+    "imageUrl": "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=500",
+    "rating": 4.4,
+    "inStock": true,
+    "tags": ["smart home", "iot", "automation"],
+    "createdAt": "2024-02-01T16:10:00Z"
+  },
+  {
+    "id": 7,
+    "name": "Yoga Mat Premium",
+    "description": "Extra thick, non-slip yoga mat with carrying strap. Perfect for yoga, pilates, and floor exercises.",
+    "price": 49.99,
+    "category": "Sports",
+    "imageUrl": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=500",
+    "rating": 4.5,
+    "inStock": true,
+    "tags": ["yoga", "fitness", "sports"],
+    "createdAt": "2024-01-28T13:40:00Z"
+  },
+  {
+    "id": 8,
+    "name": "Gourmet Coffee Maker",
+    "description": "Programmable coffee maker with built-in grinder. Brew the perfect cup every time with 12-cup capacity.",
+    "price": 199.99,
+    "category": "Kitchen",
+    "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500",
+    "rating": 4.7,
+    "inStock": false,
+    "tags": ["coffee", "kitchen", "appliances"],
+    "createdAt": "2024-01-18T10:15:00Z"
+  }
+]

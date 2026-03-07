@@ -1,0 +1,122 @@
+<div class="catalog">
+  <div class="catalog__header">
+    <h1 class="catalog__title">Product Catalog</h1>
+
+    <div class="filters">
+      <div class="filters__search">
+        <fa-icon [icon]="faSearch" class="filters__search-icon"></fa-icon>
+        <input id="search" type="search" placeholder="Search products..." [ngModel]="searchTerm()"
+          (ngModelChange)="onSearchChange($event)" class="filters__input" aria-label="Search products" />
+        <button *ngIf="searchTerm()" class="filters__clear" (click)="onSearchChange('')" aria-label="Clear search">
+          <fa-icon [icon]="faTimesCircle"></fa-icon>
+        </button>
+      </div>
+
+      <div class="filters__group">
+        <div class="filters__select-wrapper">
+          <fa-icon [icon]="faTag" class="filters__select-icon"></fa-icon>
+          <select id="category" [ngModel]="selectedCategory()" (ngModelChange)="onCategoryChange($event)"
+            class="filters__select" aria-label="Filter by category">
+            <option [ngValue]="null">All Categories</option>
+            <option *ngFor="let category of availableCategories()" [ngValue]="category">
+              {{category}}
+            </option>
+          </select>
+          <fa-icon [icon]="faChevronDown" class="filters__select-arrow"></fa-icon>
+        </div>
+
+        <div class="filters__select-wrapper">
+          <fa-icon [icon]="faSort" class="filters__select-icon"></fa-icon>
+          <select id="sort" [ngModel]="sortBy()" (ngModelChange)="onSortChange($event)" class="filters__select"
+            aria-label="Sort products">
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="price-asc">Price (Low to High)</option>
+            <option value="price-desc">Price (High to Low)</option>
+            <option value="rating-desc">Rating (Highest)</option>
+          </select>
+          <fa-icon [icon]="faChevronDown" class="filters__select-arrow"></fa-icon>
+        </div>
+      </div>
+
+      <label class="filters__checkbox">
+        <input type="checkbox" [ngModel]="inStockOnly()" (ngModelChange)="onInStockChange($event)"
+          aria-label="Show only in-stock items" />
+        <fa-icon [icon]="faBox"></fa-icon>
+        In stock only
+      </label>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading()" class="catalog__loading" role="status" aria-live="polite">
+    <fa-icon [icon]="faSpinner" spin class="catalog__loading-spinner"></fa-icon>
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading() && error()" class="catalog__error" role="alert">
+    <fa-icon [icon]="faExclamationCircle"></fa-icon>
+    <p>{{error()}}</p>
+    <button (click)="retry()" class="button button--primary">
+      <fa-icon [icon]="faRedoAlt"></fa-icon>
+      Try Again
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading() && !error() && totalItems() === 0" class="catalog__empty">
+    <fa-icon [icon]="faBoxOpen" class="catalog__empty-icon"></fa-icon>
+    <p>No products found matching your criteria.</p>
+    <button (click)="resetFilters()" class="button button--secondary">
+      <fa-icon [icon]="faFilter"></fa-icon>
+      Reset Filters
+    </button>
+  </div>
+
+  <!-- Products Grid -->
+  <div *ngIf="!loading() && !error() && totalItems() > 0" class="products-grid">
+    <div *ngFor="let product of paginatedProducts()" class="product-card">
+      <div class="product-card__image-container">
+        <img [src]="product.imageUrl" [alt]="product.name" class="product-card__image" loading="lazy" />
+        <span *ngIf="!product.inStock" class="product-card__badge">
+          <fa-icon [icon]="faTimesCircle"></fa-icon>
+          Out of Stock
+        </span>
+        <button (click)="toggleFavorite(product.id)" class="product-card__favorite" [class.active]="product.isFavorite"
+          [attr.aria-label]="(product.isFavorite ? 'Remove from' : 'Add to') + ' favorites'">
+          <fa-icon [icon]="product.isFavorite ? faHeartSolid : faHeartRegular"></fa-icon>
+        </button>
+      </div>
+
+      <div class="product-card__content">
+        <h2 class="product-card__title">
+          <a [routerLink]="['/product', product.id]" class="product-card__link">
+            {{product.name}}
+          </a>
+        </h2>
+
+        <p class="product-card__description">
+          {{product.description | slice:0:80}}...
+        </p>
+
+        <div class="product-card__meta">
+          <span class="product-card__price">
+            <fa-icon [icon]="faTag"></fa-icon>
+            R {{product.price | number:'1.2-2'}}
+          </span>
+
+          <span class="product-card__rating">
+            <fa-icon [icon]="faStar"></fa-icon>
+            {{product.rating}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <app-pagination *ngIf="!loading() && !error() && totalItems() > 0" [totalItems]="totalItems()" [pageSize]="pageSize()"
+    [currentPage]="currentPage()" [itemsPerPageOptions]="[4, 8, 12, 24]" (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+</div>

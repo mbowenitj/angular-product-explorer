@@ -1,0 +1,122 @@
+<div class="product-details">
+  <button class="back-button" (click)="goBack()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+    Back to Catalog
+  </button>
+
+  <!-- Loading State -->
+  <div *ngIf="product().loading" class="product-details__loading">
+    <fa-icon [icon]="faSpinner" spin class="loading-spinner"></fa-icon>
+    <p>Loading product details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!product().loading && product().error" class="product-details__error">
+    <fa-icon [icon]="faExclamationCircle"></fa-icon>
+    <p>{{product().error}}</p>
+    <button (click)="goBack()" class="button button--primary">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+      Go Back
+    </button>
+  </div>
+
+  <!-- Product Details -->
+  <div *ngIf="!product().loading && !product().error && product().data" class="product">
+    <div class="product__image-container">
+      <img 
+        [src]="product().data?.imageUrl" 
+        [alt]="product().data?.name"
+        class="product__image"
+      />
+      <span *ngIf="!product().data?.inStock" class="product__badge">
+        <fa-icon [icon]="faTimesCircle"></fa-icon>
+        Out of Stock
+      </span>
+    </div>
+    
+    <div class="product__content">
+      <div class="product__header">
+        <h1 class="product__title">{{product().data?.name}}</h1>
+        <button
+          (click)="toggleFavorite(product().data!.id)"
+          class="product__favorite"
+          [class.active]="product().data?.isFavorite"
+          [attr.aria-label]="(product().data?.isFavorite ? 'Remove from' : 'Add to') + ' favorites'"
+        >
+          <fa-icon [icon]="product().data?.isFavorite ? faHeartSolid : faHeartRegular"></fa-icon>
+        </button>
+      </div>
+      
+      <div class="product__meta">
+        <div class="product__price">
+          <span class="product__price-label">
+            <fa-icon [icon]="faTag"></fa-icon>
+            Price:
+          </span>
+          <span class="product__price-value">R {{product().data?.price | number:'1.2-2'}}</span>
+        </div>
+        
+        <div class="product__rating">
+          <span class="product__rating-label">
+            <fa-icon [icon]="faStar"></fa-icon>
+            Rating:
+          </span>
+          <span class="product__rating-value">
+            {{product().data?.rating}} <span class="rating-max">/ 5</span>
+          </span>
+        </div>
+        
+        <div class="product__category">
+          <span class="product__category-label">
+            <fa-icon [icon]="faFolder"></fa-icon>
+            Category:
+          </span>
+          <span class="product__category-value">{{product().data?.category}}</span>
+        </div>
+        
+        <div class="product__stock" [class.product__stock--out]="!product().data?.inStock">
+          <span class="product__stock-label">
+            <fa-icon [icon]="product().data?.inStock ? faCheckCircle : faTimesCircle"></fa-icon>
+            Availability:
+          </span>
+          <span class="product__stock-value">
+            {{product().data?.inStock ? 'In Stock' : 'Out of Stock'}}
+          </span>
+        </div>
+      </div>
+      
+      <div class="product__description">
+        <h2 class="product__description-title">
+          <fa-icon [icon]="faAlignLeft"></fa-icon>
+          Description
+        </h2>
+        <p class="product__description-text">{{product().data?.description}}</p>
+      </div>
+      
+      <div *ngIf="product().data?.tags?.length" class="product__tags">
+        <h3 class="product__tags-title">
+          <fa-icon [icon]="faTags"></fa-icon>
+          Tags
+        </h3>
+        <div class="product__tags-list">
+          <span *ngFor="let tag of product().data?.tags" class="product__tag">
+            <fa-icon [icon]="faTag"></fa-icon>
+            {{tag}}
+          </span>
+        </div>
+      </div>
+      
+      <div class="product__added">
+        <fa-icon [icon]="faCalendarAlt"></fa-icon>
+        <small>Added on: {{product().data?.createdAt | date:'longDate'}}</small>
+      </div>
+
+      <div class="product__actions">
+        <a routerLink="/catalog" class="button button--secondary">
+          <fa-icon [icon]="faArrowLeft"></fa-icon>
+          Continue Shopping
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
