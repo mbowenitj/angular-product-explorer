@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 const catalogRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./catalog.component').then(m => m.CatalogComponent)
+    loadComponent: () => import('../catalog.component').then(m => m.CatalogComponent)
   }
 ];
 
