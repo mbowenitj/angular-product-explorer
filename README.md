@@ -64,6 +64,8 @@ This project uses [Karma](https://karma-runner.github.io) as the test runner for
 ng test
 ```
 
+## Running unit tests
+AI was used for resolving some of the unit testing in components
 
 
 
