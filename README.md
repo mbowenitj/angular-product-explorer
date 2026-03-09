@@ -2,6 +2,14 @@
 
 A production-ready, scalable Product Explorer application built with Angular 17+ standalone components, signals, and modern best practices. 
 
+## Screenshots
+
+<img width="511" height="931" alt="Screenshot 2026-03-09 at 10 57 14" src="https://github.com/user-attachments/assets/ce884458-d61d-47c6-ad55-6768cb0720d6" />
+<img width="504" height="941" alt="Screenshot 2026-03-09 at 10 57 04" src="https://github.com/user-attachments/assets/86a4d00c-90e7-4577-a66a-6e2ba5cc59e1" />
+
+<img width="487" height="916" alt="Screenshot 2026-03-09 at 10 56 52" src="https://github.com/user-attachments/assets/41067109-13a8-4f19-be0a-9bafec0ad783" />
+<img width="529" height="917" alt="Screenshot 2026-03-09 at 10 56 41" src="https://github.com/user-attachments/assets/61fd2fc9-1d16-4513-8f33-97ab8b663d8d" />
+
 ##Challenge Overview
 
 Product Explorer is a small, production-like Single Page Application that allows users to browse a product catalog, search/filter products, view detailed product information, and save items to favorites. The architecture is designed with micro-frontend readiness in mind, showcasing how to build scalable enterprise applications.
