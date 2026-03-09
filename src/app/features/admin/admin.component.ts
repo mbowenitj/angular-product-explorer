@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { 
+
+import {
   faPlusCircle,
   faBox,
   faUsers,
@@ -13,22 +14,33 @@ import {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule,FontAwesomeModule], 
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
+
   constructor(private router: Router) {}
-  
-   // Icons
+
   faPlusCircle = faPlusCircle;
   faBox = faBox;
   faUsers = faUsers;
   faChartBar = faChartBar;
   faSignOutAlt = faSignOutAlt;
-  
+
+  ngOnInit(): void {
+
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+    if (!isAdmin) {
+      this.router.navigate(['/']);
+    }
+
+  }
+
   logout(): void {
     localStorage.removeItem('isAdmin');
     this.router.navigate(['/']);
   }
+
 }

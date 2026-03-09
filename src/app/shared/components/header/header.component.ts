@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,6 +15,7 @@ import { faStore, faUser, faUserShield } from '@fortawesome/free-solid-svg-icons
 export class HeaderComponent implements OnInit {
 
   private productService = inject(ProductService);
+  private router = inject(Router);
 
   // Signal from service
   favorites = this.productService.favorites;
@@ -31,13 +32,23 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleAdmin(): void {
+
     this.isAdmin = !this.isAdmin;
 
     if (this.isAdmin) {
+
       localStorage.setItem('isAdmin', 'true');
+      this.router.navigate(['/admin']);
+
     } else {
+
       localStorage.removeItem('isAdmin');
+
+      // redirect away from admin page
+      this.router.navigate(['/']);
+
     }
+
   }
 
 }

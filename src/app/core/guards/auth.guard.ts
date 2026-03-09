@@ -1,15 +1,19 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 
 export const authGuard = () => {
   const router = inject(Router);
-  const authService = inject(AuthService); 
   
-  if (authService.isAuthenticated() && authService.hasRole('admin')) {
-    return true;
+  const isAuthenticated = localStorage.getItem('isAdmin') === 'true';
+  
+  console.log('Auth guard check - isAdmin:', isAuthenticated);
+  
+  if (!isAuthenticated) {
+    console.log('Not authenticated, redirecting to home');
+    router.navigate(['/']);
+    return false;
   }
   
-  router.navigate(['/']);
-  return false;
+  console.log('Authenticated, allowing access');
+  return true;
 };
